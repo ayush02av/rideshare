@@ -156,7 +156,6 @@ const Banner = (props) => {
                                     <ListItem>
                                         <ListItemText primary={
                                             <Button sx={{
-                                                color: `primary.main`,
                                                 backgroundColor: `primary.dark`,
                                                 color: `primary.light`,
                                                 '&:hover': {
