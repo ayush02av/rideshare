@@ -120,7 +120,6 @@ const Login = (props) => {
 
             <Button
                 sx={{
-                    color: `primary.main`,
                     backgroundColor: `primary.dark`,
                     color: `primary.light`,
                     '&:hover': {
