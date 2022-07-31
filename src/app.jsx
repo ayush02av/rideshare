@@ -52,7 +52,7 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Home redirectTo={redirectTo} />} />
-          <Route path="/rider" element={<Rider />} />
+          <Route path="/rider" element={<Rider headers={headers} />} />
           <Route path="/login/:account_type" element={<Login redirectTo={redirectTo} />} />
         </Routes>
       </ThemeProvider>

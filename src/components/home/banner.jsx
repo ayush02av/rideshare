@@ -140,7 +140,7 @@ const Banner = (props) => {
                     {
                         bannerState == 'driver' && (
                             <Box>
-                                <Typography variant='h4' sx={{
+                                <Typography variant='body1' sx={{
                                     fontWeight: `550`,
                                     fontSize: `30px`,
                                 }}>

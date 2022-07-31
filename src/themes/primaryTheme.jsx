@@ -8,9 +8,9 @@ export const PrimaryTheme = createTheme({
             dark: "#112"
         },
         secondary: {
-            main: "#000",
+            main: "#2F2D2E",
             light: "#000",
-            dark: "#000"
+            dark: "#C9C9C9"
         }
     }
 })
