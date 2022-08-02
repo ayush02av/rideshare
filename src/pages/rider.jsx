@@ -9,9 +9,6 @@ import {
     Box,
     Button,
     Typography,
-    List,
-    ListItem,
-    ListItemText,
     TextField,
 } from '@mui/material/';
 
@@ -210,7 +207,7 @@ const Rider = (props) => {
                     />
                     <br />
                     <br />
-                    <Button onClick={getDestinationDetails} variant="outlined">Save My Destination!</Button>
+                    <Button onClick={getDestinationDetails} variant="outlined">Save My Destination</Button>
                     <br />
                     <br />
                     <Typography sx={{ display: `inline` }} variant="h6">Location: </Typography>
@@ -220,7 +217,18 @@ const Rider = (props) => {
                     <Typography sx={{ display: `inline` }} variant="body1">{destinationCoords && destinationCoords}</Typography>
                     <br />
                     <br />
-                    <Button onClick={findVehicles} variant="outlined">Find Rides!</Button>
+                    <Button onClick={findVehicles} variant="outlined"
+                        sx={{
+                            backgroundColor: `primary.dark`,
+                            color: `primary.light`,
+                            '&:hover': {
+                                backgroundColor: `primary.light`,
+                                color: `primary.dark`,
+                            }
+                        }}
+                    >
+                        Find Rides!
+                    </Button>
 
                 </Box>
             </Box >

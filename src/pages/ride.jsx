@@ -7,6 +7,12 @@ import {
     BackendRideApi
 } from '../external/backend'
 
+import {
+    Box,
+    Button,
+    Typography,
+} from '@mui/material/';
+
 function Ride(props) {
 
     const [vehicle, setVehicle] = useState()
@@ -75,60 +81,83 @@ function Ride(props) {
     }
 
     return (
-        <div className="body">
-            <div className="pt-5">
-                <div className="section_head">
-                    <h2 className="section_title"><span>Confirm Your Ride</span></h2>
-                    <p>
-                        Make sure to re-check your Pickup &amp; Destination Location.
-                    </p>
-                </div>
-            </div>
-            <div className="section">
-                <div className="inner-section">
-                    <div className="inner-div bg-light rounded border">
-                        <div className="heading text-center">Location</div>
-                        <div className="text">
-                            <span className="heading">Pickup</span>
-                            Location: {pickupLocation && pickupLocation}
+        <Box>
+            <Box sx={{
+                margin: `30px 25%`,
+                padding: `20px`,
+                textAlign: `center`,
+                backgroundColor: `primary.dark`,
+                color: `primary.light`,
+                '@media (max-width: 780px)': {
+                    margin: `30px 5%`,
+                }
+            }}>
+                <Typography variant="h3" >Confirm Your Ride</Typography>
+                <Typography variant="body1">
+                    Make sure to re-check your Pickup &amp; Destination Location.
+                </Typography>
+            </Box>
+
+            <Box sx={{
+                margin: `0 10%`
+            }}>
+                <Box sx={{
+                    backgroundColor: `secondary.dark`,
+                    color: `secondary.light`,
+                    padding: `20px`,
+                    margin: `10px 0`,
+                    borderRadius: `3px`
+                }}>
+                    <Typography variant="h4">Pickup</Typography>
+                    <br />
+                    <Typography sx={{ display: `inline` }} variant="h6">Location: </Typography>
+                    <Typography sx={{ display: `inline` }} variant="body1">{pickupLocation && pickupLocation}</Typography>
+                    <br />
+                    <Typography sx={{ display: `inline` }} variant="h6">Coordinates: </Typography>
+                    <Typography sx={{ display: `inline` }} variant="body1">{pickupCoords && pickupCoords}</Typography>
+
+                </Box>
+            </Box >
+
+            {
+                vehicle && (
+                    <Box sx={{
+                        margin: `0 10%`
+                    }}>
+                        <Box sx={{
+                            backgroundColor: `secondary.dark`,
+                            color: `secondary.light`,
+                            padding: `20px`,
+                            margin: `10px 0`,
+                            borderRadius: `3px`
+                        }}>
+                            <Typography variant="h4">My Ride</Typography>
                             <br />
-                            Co-Ordinates: {pickupCoords && pickupCoords}
-                        </div>
-                        <div className="text mt-3">
-                            <span className="heading">Destination</span>
-                            Location: {destinationLocation && destinationLocation}
+                            <Typography variant="h6">{vehicle.vehicle_name} | {vehicle.vehicle_type}</Typography>
+                            <Typography variant="body1">INR {vehicle.vehicle_fare_per_km}/km</Typography>
                             <br />
-                            Co-Ordinates: {destinationCoords && destinationCoords}
-                        </div>
-                    </div>
-                </div>
-            </div >
-            {vehicle && (
-                <div className="section">
-                    <div className="inner-section">
-                        <div className="inner-div bg-light rounded border">
-                            <div className="heading text-center">My Ride</div>
-                            <div className="text">
-                                <span className="heading">Vehicle</span>
-                                {vehicle.vehicle_name} | {vehicle.vehicle_type}
-                                <br />
-                                INR {vehicle.vehicle_fare_per_km}/km
-                            </div>
-                            <div className="text mt-3">
-                                <span className="heading">Driver</span>
-                                {vehicle.vehicle_driver.driver_account.first_name}
-                                &nbsp;
-                                {vehicle.vehicle_driver.driver_account.last_name}
-                                <br />
-                            </div>
-                        </div>
-                    </div>
-                </div >
-            )}
-            <div className="inner-section mb-5">
-                <button className="btn bg-success text-light p-2" onClick={bookMyRide}>Book My Ride!</button>
-            </div>
-        </div>
+                            <Typography variant="body1">
+                                Driver :&nbsp;
+                                {vehicle.vehicle_driver.driver_account.first_name} {vehicle.vehicle_driver.driver_account.last_name}
+                            </Typography>
+                            <br />
+                            <Button onClick={bookMyRide} variant="outlined"
+                                sx={{
+                                    backgroundColor: `primary.dark`,
+                                    color: `primary.light`,
+                                    '&:hover': {
+                                        backgroundColor: `primary.light`,
+                                        color: `primary.dark`,
+                                    }
+                                }}
+                            >
+                                Book My Ride!
+                            </Button>
+                        </Box>
+                    </Box >
+                )
+            }
+        </Box>
     )
 }
 
