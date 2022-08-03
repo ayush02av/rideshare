@@ -115,7 +115,50 @@ function Ride(props) {
                     <br />
                     <Typography sx={{ display: `inline` }} variant="h6">Coordinates: </Typography>
                     <Typography sx={{ display: `inline` }} variant="body1">{pickupCoords && pickupCoords}</Typography>
+                    <br />
+                    {
+                        pickupCoords && (
+                            <iframe
+                                style={{
+                                    maxWidth: `100%`
+                                }}
+                                frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                                src={`https://www.openstreetmap.org/export/embed.html?bbox=${pickupCoords.split(',')[1]}%2C${pickupCoords.split(',')[0]}%2C${pickupCoords.split(',')[1]}%2C${pickupCoords.split(',')[0]}&amp;layer=mapnik&amp;marker=${pickupCoords.split(',')[0]}%2C${pickupCoords.split(',')[1]}`}
+                            />
+                        )
+                    }
+                </Box>
+            </Box >
 
+            <Box sx={{
+                margin: `0 10%`
+            }}>
+                <Box sx={{
+                    backgroundColor: `secondary.dark`,
+                    color: `secondary.light`,
+                    padding: `20px`,
+                    margin: `10px 0`,
+                    borderRadius: `3px`
+                }}>
+                    <Typography variant="h4">Destination</Typography>
+                    <br />
+                    <Typography sx={{ display: `inline` }} variant="h6">Location: </Typography>
+                    <Typography sx={{ display: `inline` }} variant="body1">{destinationLocation && destinationLocation}</Typography>
+                    <br />
+                    <Typography sx={{ display: `inline` }} variant="h6">Coordinates: </Typography>
+                    <Typography sx={{ display: `inline` }} variant="body1">{destinationCoords && destinationCoords}</Typography>
+                    <br />
+                    {
+                        destinationCoords && (
+                            <iframe
+                                style={{
+                                    maxWidth: `100%`
+                                }}
+                                frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                                src={`https://www.openstreetmap.org/export/embed.html?bbox=${destinationCoords.split(',')[1]}%2C${destinationCoords.split(',')[0]}%2C${destinationCoords.split(',')[1]}%2C${destinationCoords.split(',')[0]}&amp;layer=mapnik&amp;marker=${destinationCoords.split(',')[0]}%2C${destinationCoords.split(',')[1]}`}
+                            />
+                        )
+                    }
                 </Box>
             </Box >
 
@@ -157,7 +200,7 @@ function Ride(props) {
                     </Box >
                 )
             }
-        </Box>
+        </Box >
     )
 }
 
