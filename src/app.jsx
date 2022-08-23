@@ -50,7 +50,7 @@ const App = () => {
 
     <Router>
       <ThemeProvider theme={PrimaryTheme}>
-        <Header />
+        <Header redirectTo={redirectTo} />
         <Routes>
           <Route path="/" element={<Home redirectTo={redirectTo} />} />
           <Route path="/rider" element={<Rider headers={headers} />} />

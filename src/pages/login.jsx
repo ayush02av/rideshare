@@ -87,8 +87,6 @@ const Login = (props) => {
             margin: `50px calc(30% - 20px)`,
             padding: `20px`,
             borderRadius: `5px`,
-            // backgroundColor: `primary.dark`,
-            // color: `primary.light`,
             '@media (max-width: 780px)': {
                 margin: `50px calc(10% - 20px)`,
                 width: `80%`

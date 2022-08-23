@@ -187,17 +187,26 @@ const Rider = (props) => {
                     <Typography sx={{ display: `inline` }} variant="h6">Coordinates: </Typography>
                     <Typography sx={{ display: `inline` }} variant="body1">{pickupCoords && pickupCoords}</Typography>
                     <br />
-                    {
-                        pickupCoords && (
-                            <iframe
-                                style={{
-                                    maxWidth: `100%`
-                                }}
-                                frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                                src={`https://www.openstreetmap.org/export/embed.html?bbox=${pickupCoords.split(',')[1]}%2C${pickupCoords.split(',')[0]}%2C${pickupCoords.split(',')[1]}%2C${pickupCoords.split(',')[0]}&amp;layer=mapnik&amp;marker=${pickupCoords.split(',')[0]}%2C${pickupCoords.split(',')[1]}`}
-                            />
-                        )
-                    }
+                    <Box sx={{
+                        width: `100%`,
+                        height: `500px`,
+                        '@media (max-width: 780px)': {
+                            height: `200px`
+                        }
+                    }}>
+                        {
+                            pickupCoords && (
+                                <iframe
+                                    style={{
+                                        width: `100%`,
+                                        height: `100%`
+                                    }}
+                                    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                                    src={`https://www.openstreetmap.org/export/embed.html?bbox=${pickupCoords.split(',')[1]}%2C${pickupCoords.split(',')[0]}%2C${pickupCoords.split(',')[1]}%2C${pickupCoords.split(',')[0]}&amp;layer=mapnik&amp;marker=${pickupCoords.split(',')[0]}%2C${pickupCoords.split(',')[1]}`}
+                                />
+                            )
+                        }
+                    </Box>
                 </Box>
 
                 <Box sx={{
