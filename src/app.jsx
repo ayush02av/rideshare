@@ -10,6 +10,7 @@ import {
 import './styles/index.css'
 
 import Header from "./components/header"
+import Footer from "./components/footer"
 
 import Home from './pages/home'
 import Rider from './pages/rider'
@@ -57,6 +58,7 @@ const App = () => {
           <Route path="/ride/:id" element={<Ride headers={headers} />} />
           <Route path="/login/:account_type" element={<Login redirectTo={redirectTo} />} />
         </Routes>
+        <Footer />
       </ThemeProvider>
     </Router>
   )

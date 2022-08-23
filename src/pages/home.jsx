@@ -6,8 +6,10 @@ import {
 
 import {
     Box,
+    Typography
 } from '@mui/material/'
 
+import home from "../assets/images/home.jpg"
 import Banner from '../components/home/banner'
 
 const Home = (props) => {
@@ -48,6 +50,17 @@ const Home = (props) => {
     return (
         <Box>
             <Banner redirectTo={props.redirectTo} />
+            <Typography variant='h5' sx={{
+                margin: `40px`,
+                textAlign: `center`,
+                fontWeight: `bolder`
+            }}>
+                My Share Ride helps you easily book share-cabs in under 3 clicks
+            </Typography>
+            <Box component="img" src={home} sx={{
+                width: `80%`,
+                margin: `0 10%`
+            }} alt="rider" />
         </Box>
     )
 }
