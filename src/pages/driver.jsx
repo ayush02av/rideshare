@@ -7,7 +7,14 @@ import {
     SELF_ROUTE
 } from '../external/backend';
 
-function Driver(props) {
+import {
+    Box,
+    Button,
+    Typography,
+    TextField,
+} from '@mui/material/';
+
+const Driver = (props) => {
 
     const [driver, setDriver] = useState()
     const [qrcodeState, setQrState] = useState(false)
@@ -96,114 +103,212 @@ function Driver(props) {
     }
 
     return (
-        <div className="body">
-            <div className="section">
-                <div className="inner-section">
-                    <div className="inner-div bg-primary text-light">
-                        <div className="heading text-center">Driver Portal</div>
-                        <div className="text">
-                            Welcome,&nbsp;
-                            <i>
-                                {driver && driver.driver_account.first_name}
-                                &nbsp;
-                                {driver && driver.driver_account.last_name}
-                            </i>
-                        </div>
-                        <div className="text">
-                            {driver && driver.vehicle && (
+        <Box>
+            <Box sx={{
+                margin: `30px 25%`,
+                padding: `20px`,
+                textAlign: `center`,
+                backgroundColor: `primary.dark`,
+                color: `primary.light`,
+                '@media (max-width: 780px)': {
+                    margin: `30px 5%`,
+                }
+            }}>
+                <Typography variant="h3">
+                    Driver Portal
+                </Typography>
+            </Box>
+
+            <Box sx={{
+                margin: `0 10%`
+            }}>
+                <Box sx={{
+                    backgroundColor: `secondary.dark`,
+                    color: `secondary.light`,
+                    padding: `20px`,
+                    margin: `10px 0`,
+                    borderRadius: `3px`
+                }}>
+
+                    {driver && (
+                        <>
+                            <Typography variant="h5">
+                                Welcome,&nbsp;
+                                <i>
+                                    {driver.driver_account.first_name}
+                                    &nbsp;
+                                    {driver.driver_account.last_name}
+                                </i>
+                            </Typography>
+
+                            <br />
+                            <Typography variant="h4">My Vehicle</Typography>
+
+                            <Typography variant="h6">
+                                Name: {driver.vehicle.vehicle_name}
+                            </Typography>
+                            <Typography variant="h6">
+                                Type: {driver.vehicle.vehicle_type}
+                            </Typography>
+                            <Typography variant="h6">
+                                Fare: ${driver.vehicle.vehicle_fare_per_km}/km
+                            </Typography>
+                        </>
+                    )}
+                </Box>
+            </Box >
+
+            <Box sx={{
+                margin: `0 10%`
+            }}>
+                <Box sx={{
+                    backgroundColor: `secondary.dark`,
+                    color: `secondary.light`,
+                    padding: `20px`,
+                    margin: `10px 0`,
+                    borderRadius: `3px`
+                }}>
+                    {(driver && driver.current_ride && driver.current_rider) && (
+                        <>
+                            <Typography variant="h5">Current Ride</Typography>
+
+                            <br />
+                            <Typography variant="h4">
+                                Rider Details
+                            </Typography>
+
+                            <Typography variant="h6">
+                                Name: {driver.current_rider.rider_account.first_name} {driver.current_rider.rider_account.last_name}
+                            </Typography>
+
+                            <Typography variant="h6">
+                                Pickup: {driver.current_ride.ride_pickup_location}
+                            </Typography>
+                            <Box sx={{
+                                width: `100%`,
+                                height: `300px`,
+                                '@media (max-width: 780px)': {
+                                    height: `200px`
+                                }
+                            }}>
+                                {
+                                    (
+                                        <iframe
+                                            style={{
+                                                width: `100%`,
+                                                height: `100%`
+                                            }}
+                                            src={`https://www.openstreetmap.org/export/embed.html?bbox=${driver.current_ride.ride_pickup_coords.split(',')[1]}%2C${driver.current_ride.ride_pickup_coords.split(',')[0]}%2C${driver.current_ride.ride_pickup_coords.split(',')[1]}%2C${driver.current_ride.ride_pickup_coords.split(',')[0]}&amp;layer=mapnik&amp;marker=${driver.current_ride.ride_pickup_coords.split(',')[0]}%2C${driver.current_ride.ride_pickup_coords.split(',')[1]}`}
+                                        />
+                                    )
+                                }
+                            </Box>
+
+                            <br />
+                            <Typography variant="h6">
+                                Destination: {driver.current_ride.ride_destination_location}
+                            </Typography>
+                            <Box sx={{
+                                width: `100%`,
+                                height: `300px`,
+                                '@media (max-width: 780px)': {
+                                    height: `200px`
+                                }
+                            }}>
+                                {
+                                    (
+                                        <iframe
+                                            style={{
+                                                width: `100%`,
+                                                height: `100%`
+                                            }}
+                                            src={`https://www.openstreetmap.org/export/embed.html?bbox=${driver.current_ride.ride_destination_coords.split(',')[1]}%2C${driver.current_ride.ride_destination_coords.split(',')[0]}%2C${driver.current_ride.ride_destination_coords.split(',')[1]}%2C${driver.current_ride.ride_destination_coords.split(',')[0]}&amp;layer=mapnik&amp;marker=${driver.current_ride.ride_destination_coords.split(',')[0]}%2C${driver.current_ride.ride_destination_coords.split(',')[1]}`}
+                                        />
+                                    )
+                                }
+                            </Box>
+
+                            <br />
+                            <Typography variant="h6">
+                                Ride Status: {driver.current_ride.ride_status}
+                            </Typography>
+                            <Typography variant="h6">
+                                Booked At: {driver.current_ride.ride_book_time}
+                            </Typography>
+                            {driver.current_ride.ride_status == "Booked" && (
+                                <Button variant='contained' onClick={startMyRide}>
+                                    Start the Ride
+                                </Button>
+                            )}
+                            {driver.current_ride.ride_status == "Started" && (
                                 <>
-                                    Vehicle: {driver.vehicle.vehicle_name}
-                                    <br />
-                                    Type: {driver.vehicle.vehicle_type}
+                                    <Typography variant="h6">
+                                        Started At: {driver.current_ride.ride_start_time}
+                                    </Typography>
+                                    <Button variant='contained' onClick={endMyRide}>
+                                        End the Ride
+                                    </Button>
                                 </>
                             )}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {
-                (driver && driver.current_ride && driver.current_rider) ? (
-                    <div className="section">
-                        <div className="inner-section">
-                            <div className="inner-div bg-success text-light">
-                                <div className="heading text-center">Current Ride</div>
-                                <div className="text">
-                                    Rider:&nbsp;
-                                    {driver.current_rider.rider_account.first_name}
-                                    &nbsp;
-                                    {driver.current_rider.rider_account.last_name}
+                        </>
+                    )}
 
-                                    <br />
+                    {(driver && !(driver.current_ride && driver.current_rider)) && (
+                        <>
+                            <Typography variant="h4">My QR Code</Typography>
+                            <br />
+                            <Box id="qrcode"></Box>
+                            <br />
+                            <Typography variant="body1" component="a" sx={{
+                                color: `blue`,
+                                textDecoration: `unset`
+                            }} href={qrCodeLink} target="_blank">Or Click On This Link</Typography>
+                        </>
+                    )}
+                </Box>
+            </Box >
 
-                                    Booked at:&nbsp;
-                                    {driver.current_ride.ride_book_time}
+            <Box sx={{
+                margin: `0 10%`
+            }}>
+                <Box sx={{
+                    backgroundColor: `secondary.dark`,
+                    color: `secondary.light`,
+                    padding: `20px`,
+                    margin: `10px 0`,
+                    borderRadius: `3px`
+                }}>
 
-                                    <br />
+                    <Typography variant="h4">Previous Rides</Typography>
 
-                                    {driver.current_ride.ride_status == "Booked" && (
-                                        <div className="text-center">
-                                            <button className="btn btn-warning" onClick={startMyRide}>
-                                                Start the Ride
-                                            </button>
-                                        </div>
-                                    )}
-                                    {driver.current_ride.ride_status == "Started" && (
-                                        <div className="text-center">
-                                            <button className="btn btn-warning" onClick={endMyRide}>
-                                                End the Ride
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                ) : (
-                    <>
-                        <div className="section">
-                            <div className="inner-section">
-                                <div className="inner-div bg-success text-light">
-                                    <div className="heading text-center">Scan this QR Code to Book Ride</div>
-                                    <br />
-                                    <span id="qrcode" className="text-center" style={{
-                                        backgroundColor: `red`,
-                                        padding: `0`
-                                    }}></span>
-                                    <br />
-                                    <span><a className="text-light" href={qrCodeLink} target="_blank">Or Click On This Link</a></span>
-                                </div>
-                            </div>
-                        </div>
-                    </>
-                )
-            }
-            <div className="section">
-                <div className="inner-section">
-                    {
-                        (driver && driver.previous_rides && driver.previous_rides.length > 0) ? (
-                            <div className="inner-div bg-success text-light">
-                                <div className="heading text-center">Previous Rides</div>
-                                {
-                                    driver.previous_rides.map((previous_ride, index) => {
-                                        return (
-                                            <div key={index} className="inner-fixed-div bg-light text-dark rounded mb-3 p-3">
-                                                Start: <span className="">{previous_ride.ride_start_time}</span>
-                                                <br />
-                                                End: <span className="">{previous_ride.ride_end_time}</span>
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
-                        ) : (
-                            <div className="p-3 rounded bg-danger text-light">
-                                <div className="heading text-center">No Previous Rides</div>
-                            </div>
-                        )
-                    }
-                </div>
-            </div>
-        </div >
+                    {(driver && driver.previous_rides) ? (
+                        <>
+                            {driver.previous_rides.map((previous_ride, index) => {
+                                return (
+                                    <Box key={index} sx={{
+                                        backgroundColor: `primary.light`,
+                                        padding: `20px`,
+                                        margin: `20px 0`,
+                                        borderRadius: `4px`
+                                    }}>
+                                        <Typography variant="h6">
+                                            Start: {previous_ride.ride_start_time}
+                                            <br />
+                                            End: {previous_ride.ride_end_time}
+                                        </Typography>
+                                    </Box>
+                                )
+                            })}
+                        </>
+                    ) : (
+                        <Typography variant="h6">
+                            No previous Rides To show
+                        </Typography>
+                    )}
+
+                </Box>
+            </Box >
+        </Box >
     )
 }
 

@@ -16,6 +16,7 @@ import Home from './pages/home'
 import Rider from './pages/rider'
 import Login from './pages/login'
 import Ride from './pages/ride'
+import Driver from './pages/driver'
 
 const headers = {
   'Authorization': `Token ${localStorage.getItem('token')}`
@@ -57,6 +58,7 @@ const App = () => {
           <Route path="/rider" element={<Rider headers={headers} />} />
           <Route path="/ride/:id" element={<Ride headers={headers} />} />
           <Route path="/login/:account_type" element={<Login redirectTo={redirectTo} />} />
+          <Route path="/driver" element={<Driver headers={headers} />} />
         </Routes>
         <Footer />
       </ThemeProvider>

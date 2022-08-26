@@ -130,7 +130,6 @@ function Ride(props) {
                                         width: `100%`,
                                         height: `100%`
                                     }}
-                                    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                                     src={`https://www.openstreetmap.org/export/embed.html?bbox=${pickupCoords.split(',')[1]}%2C${pickupCoords.split(',')[0]}%2C${pickupCoords.split(',')[1]}%2C${pickupCoords.split(',')[0]}&amp;layer=mapnik&amp;marker=${pickupCoords.split(',')[0]}%2C${pickupCoords.split(',')[1]}`}
                                 />
                             )
@@ -171,7 +170,6 @@ function Ride(props) {
                                         width: `100%`,
                                         height: `100%`
                                     }}
-                                    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                                     src={`https://www.openstreetmap.org/export/embed.html?bbox=${destinationCoords.split(',')[1]}%2C${destinationCoords.split(',')[0]}%2C${destinationCoords.split(',')[1]}%2C${destinationCoords.split(',')[0]}&amp;layer=mapnik&amp;marker=${destinationCoords.split(',')[0]}%2C${destinationCoords.split(',')[1]}`}
                                 />
                             )
