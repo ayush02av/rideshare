@@ -1,5 +1,5 @@
 // const SELF_ROUTE = "http://localhost:3000";
-const SELF_ROUTE = "https://myshareride.netlify.app/";
+const SELF_ROUTE = "https://myshareride.netlify.app";
 
 // const BASE_API_URL = "http://localhost:8000/";
 const BASE_API_URL = "https://qrappbackend.herokuapp.com/";
