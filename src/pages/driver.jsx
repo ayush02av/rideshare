@@ -40,8 +40,8 @@ const Driver = (props) => {
 
                 if (qrcodeState === false) {
                     var link = `${SELF_ROUTE}/ride/${res.data.driver.vehicle._id}`;
-                    document.getElementById("qrcode").innerHTML = "";
-                    new QRCode(document.getElementById("qrcode"), `${SELF_ROUTE}/ride/${res.data.driver.vehicle._id}`);
+                    console.log(link)
+                    new QRCode(document.getElementById("qrcode"), `${link}`);
                     setQrCodeLink(link);
                     setQrState(true);
                 }
