@@ -38,15 +38,12 @@ const Driver = (props) => {
                 console.log(res.data);
                 setDriver(res.data.driver);
 
-                // if (qrcodeState === false) {
                 var link = `${SELF_ROUTE}/ride/${res.data.driver.vehicle._id}`;
                 setQrCodeLink(link);
-                setQrState(true);
                 console.log(link);
-                // new QRCode(document.getElementById("qrcode"), `${link}`);
-                // }
-                new QRCode(document.getElementById("qrcode"), `${link}`);
 
+                new QRCode(document.getElementById("qrcode"), `${link}`);
+                setQrState(true);
             })
             .catch((err) => {
                 console.log(err)
@@ -169,103 +166,103 @@ const Driver = (props) => {
                     margin: `10px 0`,
                     borderRadius: `3px`
                 }}>
-                    {(driver && driver.current_ride && driver.current_rider) && (
-                        <>
-                            <Typography variant="h5">Current Ride</Typography>
+                    {
+                        (driver && driver.current_ride && driver.current_rider) ? (
+                            <>
+                                <Typography variant="h5">Current Ride</Typography>
 
-                            <br />
-                            <Typography variant="h4">
-                                Rider Details
-                            </Typography>
+                                <br />
+                                <Typography variant="h4">
+                                    Rider Details
+                                </Typography>
 
-                            <Typography variant="h6">
-                                Name: {driver.current_rider.rider_account.first_name} {driver.current_rider.rider_account.last_name}
-                            </Typography>
+                                <Typography variant="h6">
+                                    Name: {driver.current_rider.rider_account.first_name} {driver.current_rider.rider_account.last_name}
+                                </Typography>
 
-                            <Typography variant="h6">
-                                Pickup: {driver.current_ride.ride_pickup_location}
-                            </Typography>
-                            <Box sx={{
-                                width: `100%`,
-                                height: `300px`,
-                                '@media (max-width: 780px)': {
-                                    height: `200px`
-                                }
-                            }}>
-                                {
-                                    (
-                                        <iframe
-                                            style={{
-                                                width: `100%`,
-                                                height: `100%`
-                                            }}
-                                            src={`https://www.openstreetmap.org/export/embed.html?bbox=${driver.current_ride.ride_pickup_coords.split(',')[1]}%2C${driver.current_ride.ride_pickup_coords.split(',')[0]}%2C${driver.current_ride.ride_pickup_coords.split(',')[1]}%2C${driver.current_ride.ride_pickup_coords.split(',')[0]}&amp;layer=mapnik&amp;marker=${driver.current_ride.ride_pickup_coords.split(',')[0]}%2C${driver.current_ride.ride_pickup_coords.split(',')[1]}`}
-                                        />
-                                    )
-                                }
-                            </Box>
+                                <Typography variant="h6">
+                                    Pickup: {driver.current_ride.ride_pickup_location}
+                                </Typography>
+                                <Box sx={{
+                                    width: `100%`,
+                                    height: `300px`,
+                                    '@media (max-width: 780px)': {
+                                        height: `200px`
+                                    }
+                                }}>
+                                    {
+                                        (
+                                            <iframe
+                                                style={{
+                                                    width: `100%`,
+                                                    height: `100%`
+                                                }}
+                                                src={`https://www.openstreetmap.org/export/embed.html?bbox=${driver.current_ride.ride_pickup_coords.split(',')[1]}%2C${driver.current_ride.ride_pickup_coords.split(',')[0]}%2C${driver.current_ride.ride_pickup_coords.split(',')[1]}%2C${driver.current_ride.ride_pickup_coords.split(',')[0]}&amp;layer=mapnik&amp;marker=${driver.current_ride.ride_pickup_coords.split(',')[0]}%2C${driver.current_ride.ride_pickup_coords.split(',')[1]}`}
+                                            />
+                                        )
+                                    }
+                                </Box>
 
-                            <br />
-                            <Typography variant="h6">
-                                Destination: {driver.current_ride.ride_destination_location}
-                            </Typography>
-                            <Box sx={{
-                                width: `100%`,
-                                height: `300px`,
-                                '@media (max-width: 780px)': {
-                                    height: `200px`
-                                }
-                            }}>
-                                {
-                                    (
-                                        <iframe
-                                            style={{
-                                                width: `100%`,
-                                                height: `100%`
-                                            }}
-                                            src={`https://www.openstreetmap.org/export/embed.html?bbox=${driver.current_ride.ride_destination_coords.split(',')[1]}%2C${driver.current_ride.ride_destination_coords.split(',')[0]}%2C${driver.current_ride.ride_destination_coords.split(',')[1]}%2C${driver.current_ride.ride_destination_coords.split(',')[0]}&amp;layer=mapnik&amp;marker=${driver.current_ride.ride_destination_coords.split(',')[0]}%2C${driver.current_ride.ride_destination_coords.split(',')[1]}`}
-                                        />
-                                    )
-                                }
-                            </Box>
+                                <br />
+                                <Typography variant="h6">
+                                    Destination: {driver.current_ride.ride_destination_location}
+                                </Typography>
+                                <Box sx={{
+                                    width: `100%`,
+                                    height: `300px`,
+                                    '@media (max-width: 780px)': {
+                                        height: `200px`
+                                    }
+                                }}>
+                                    {
+                                        (
+                                            <iframe
+                                                style={{
+                                                    width: `100%`,
+                                                    height: `100%`
+                                                }}
+                                                src={`https://www.openstreetmap.org/export/embed.html?bbox=${driver.current_ride.ride_destination_coords.split(',')[1]}%2C${driver.current_ride.ride_destination_coords.split(',')[0]}%2C${driver.current_ride.ride_destination_coords.split(',')[1]}%2C${driver.current_ride.ride_destination_coords.split(',')[0]}&amp;layer=mapnik&amp;marker=${driver.current_ride.ride_destination_coords.split(',')[0]}%2C${driver.current_ride.ride_destination_coords.split(',')[1]}`}
+                                            />
+                                        )
+                                    }
+                                </Box>
 
-                            <br />
-                            <Typography variant="h6">
-                                Ride Status: {driver.current_ride.ride_status}
-                            </Typography>
-                            <Typography variant="h6">
-                                Booked At: {driver.current_ride.ride_book_time}
-                            </Typography>
-                            {driver.current_ride.ride_status == "Booked" && (
-                                <Button variant='contained' onClick={startMyRide}>
-                                    Start the Ride
-                                </Button>
-                            )}
-                            {driver.current_ride.ride_status == "Started" && (
-                                <>
-                                    <Typography variant="h6">
-                                        Started At: {driver.current_ride.ride_start_time}
-                                    </Typography>
-                                    <Button variant='contained' onClick={endMyRide}>
-                                        End the Ride
+                                <br />
+                                <Typography variant="h6">
+                                    Ride Status: {driver.current_ride.ride_status}
+                                </Typography>
+                                <Typography variant="h6">
+                                    Booked At: {driver.current_ride.ride_book_time}
+                                </Typography>
+                                {driver.current_ride.ride_status == "Booked" && (
+                                    <Button variant='contained' onClick={startMyRide}>
+                                        Start the Ride
                                     </Button>
-                                </>
-                            )}
-                        </>
-                    )}
-
-                    {(driver && !(driver.current_ride && driver.current_rider)) && (
-                        <>
-                            <Typography variant="h4">My QR Code</Typography>
-                            <br />
-                            <Box id="qrcode"></Box>
-                            <br />
-                            <Typography variant="body1" component="a" sx={{
-                                color: `blue`,
-                                textDecoration: `unset`
-                            }} href={qrCodeLink} target="_blank">Or Click On This Link</Typography>
-                        </>
-                    )}
+                                )}
+                                {driver.current_ride.ride_status == "Started" && (
+                                    <>
+                                        <Typography variant="h6">
+                                            Started At: {driver.current_ride.ride_start_time}
+                                        </Typography>
+                                        <Button variant='contained' onClick={endMyRide}>
+                                            End the Ride
+                                        </Button>
+                                    </>
+                                )}
+                            </>
+                        ) : (
+                            <>
+                                <Typography variant="h4">My QR Code</Typography>
+                                <br />
+                                <Box id="qrcode"></Box>
+                                <br />
+                                <Typography variant="body1" component="a" sx={{
+                                    color: `blue`,
+                                    textDecoration: `unset`
+                                }} href={qrCodeLink} target="_blank">Or Click On This Link</Typography>
+                            </>
+                        )
+                    }
                 </Box>
             </Box >
 
