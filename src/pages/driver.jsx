@@ -38,13 +38,14 @@ const Driver = (props) => {
                 console.log(res.data);
                 setDriver(res.data.driver);
 
-                if (qrcodeState === false) {
-                    var link = `${SELF_ROUTE}/ride/${res.data.driver.vehicle._id}`;
-                    setQrCodeLink(link);
-                    setQrState(true);
-                    console.log(link);
-                    new QRCode(document.getElementById("qrcode"), `${link}`);
-                }
+                // if (qrcodeState === false) {
+                var link = `${SELF_ROUTE}/ride/${res.data.driver.vehicle._id}`;
+                setQrCodeLink(link);
+                setQrState(true);
+                console.log(link);
+                // new QRCode(document.getElementById("qrcode"), `${link}`);
+                // }
+                new QRCode(document.getElementById("qrcode"), `${link}`);
 
             })
             .catch((err) => {
